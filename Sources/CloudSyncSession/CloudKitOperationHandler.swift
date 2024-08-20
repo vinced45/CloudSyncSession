@@ -459,10 +459,14 @@ private extension CloudKitOperationHandler {
     }
 
     func createSubscription(zoneID: CKRecordZone.ID, subscriptionID: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let subscription = CKRecordZoneSubscription(
-            zoneID: zoneID,
-            subscriptionID: subscriptionID
-        )
+//        let subscription = CKRecordZoneSubscription(
+//            zoneID: zoneID,
+//            subscriptionID: subscriptionID
+//        )
+        let pred = NSPredicate(value: true)
+        let subscription = CKQuerySubscription(recordType: CKRecord.RecordType(stringLiteral: "Item"),
+                                               predicate: pred,
+                                               subscriptionID: subscriptionID)
 
         let notificationInfo = CKSubscription.NotificationInfo()
         notificationInfo.shouldSendContentAvailable = true
